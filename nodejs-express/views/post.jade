@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h2= post.title
+  if user.name
+    h5 by #{user.name}
+  p= post.text

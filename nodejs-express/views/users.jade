@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h3 Users:
+  each user in users
+    a(href='/user/#{user.id}/posts')
+      h3= user.name

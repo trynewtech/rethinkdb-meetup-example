@@ -2,10 +2,7 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var rethinkdb = require('rethinkdb');
-
 var app = express();
-
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -16,26 +13,16 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
+if ('development' == app.get('env')) {app.use(express.errorHandler());}
+app.get('/', function(req, res) {res.render('index');});
+app.get('/post', function(req, res) {res.render('makepost');});
 
 /*
 // DO THINGS HERE:
 */
 
-app.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
-
-app.get('/post', function(req, res) {
-  res.render('makepost');
-});
-
 app.post('/post', function(req, res) {
-  postInfo = req.body.post
+  postInfo = req.body.post;
   //TODO: save the post
   post = {};
   res.redirect('/post/' + post.id);
@@ -45,7 +32,9 @@ app.get('/post/:id', function(req, res) {
   postId = req.params.id;
   //TODO: get the post by it's id (use postId)
   post = {};
-  res.render('post', { post: post });
+  //Optional TODO: get the users information
+  user = {};
+  res.render('post', { post: post, user: user });
 });
 
 app.get('/users', function(req, res) {
@@ -67,7 +56,6 @@ app.get('/user/:id/posts', function(req, res) {
   res.render('posts', { posts: posts });
 });
 
-
 // ADVANCED
 // get post by title
 app.get('/post/title/:title', function(req, res) {
@@ -81,6 +69,4 @@ app.get('/post/title/:title', function(req, res) {
 // OK STOP DOING THINGS
 */
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+http.createServer(app).listen(app.get('port'), function(){console.log('Express server listening on port ' + app.get('port'));});
