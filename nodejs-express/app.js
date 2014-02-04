@@ -22,45 +22,45 @@ app.get('/post', function(req, res) {res.render('makepost');});
 */
 
 app.post('/post', function(req, res) {
-  postInfo = req.body.post;
+  var postInfo = req.body.post;
 
   //TODO: save the post
-  post = {};
+  var post = {};
 
   res.redirect('/post/' + post.id);
 });
 
 app.get('/post/:id', function(req, res) {
-  postId = req.params.id;
+  var postId = req.params.id;
 
   //TODO: get the post by its id (use postId)
-  post = {};
+  var post = {};
 
   //Optional TODO: get the user's information
-  user = {};
+  var user = {};
 
   res.render('post', { post: post, user: user });
 });
 
 app.get('/users', function(req, res) {
   //TODO: get all users
-  users = [];
+  var users = [];
 
   res.render('users', { users: users });
 });
 
 app.get('/posts', function(req, res) {
   //TODO: get all posts
-  posts = [];
+  var posts = [];
 
   res.render('posts', { posts: posts });
 });
 
 app.get('/user/:id/posts', function(req, res) {
-  userId = req.params.id;
+  var userId = req.params.id;
 
   //TODO: get all posts by a user (use their userId)
-  posts = [];
+  var posts = [];
 
   res.render('posts', { posts: posts });
 });
@@ -68,10 +68,10 @@ app.get('/user/:id/posts', function(req, res) {
 // ADVANCED
 // get post by title
 app.get('/post/title/:title', function(req, res) {
-  postTitle = req.params.title;
+  var postTitle = req.params.title;
 
   //TODO: get the post by its title
-  post = {};
+  var post = {};
 
   res.render('post', { post: post });
 });
