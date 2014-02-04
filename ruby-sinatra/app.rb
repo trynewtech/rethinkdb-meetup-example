@@ -11,7 +11,7 @@ class Rethink < Sinatra::Base
   #
 
   post '/post' do
-    postInfo = params[:post]
+    post_info = params[:post]
 
     #TODO: save the post
     post = {}
@@ -20,7 +20,7 @@ class Rethink < Sinatra::Base
   end
 
   get '/post/:id' do
-    postId = params[:id]
+    post_id = params[:id]
 
     #TODO: get the post by its id (use postId)
     @post = {}
@@ -46,7 +46,7 @@ class Rethink < Sinatra::Base
   end
 
   get '/user/:id/posts' do
-    userId = params[:id]
+    user_id = params[:id]
 
     #TODO: get all posts by a user (user their userId)
     @posts = []
@@ -57,7 +57,7 @@ class Rethink < Sinatra::Base
   # ADVANCED
   # get post by title
   get '/post/title/:title' do
-    postTitle = params[:title]
+    post_title = params[:title]
 
     #TODO: get the post by its title
     @post = {}
