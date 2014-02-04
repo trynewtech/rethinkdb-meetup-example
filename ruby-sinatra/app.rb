@@ -12,36 +12,45 @@ class Rethink < Sinatra::Base
 
   post '/post' do
     postInfo = params[:post]
+
     #TODO: save the post
     post = {}
+
     redirect '/post' + post.id
   end
 
   get '/post/:id' do
     postId = params[:id]
-    #TODO: get the post by it's id (use postId)
+
+    #TODO: get the post by its id (use postId)
     @post = {}
+
     #Optional TODO: get the users information
     @user = {}
+
     slim :post
   end
 
   get '/users' do
     #TODO: get all users
     @users = []
+
     slim :users
   end
 
   get '/posts' do
     #TODO: get all posts
     @posts = []
+
     slim :posts
   end
 
   get '/user/:id/posts' do
     userId = params[:id]
-    #TODO: get all postts by a user (user their userId)
+
+    #TODO: get all posts by a user (user their userId)
     @posts = []
+
     slim :posts
   end
 
@@ -49,8 +58,10 @@ class Rethink < Sinatra::Base
   # get post by title
   get '/post/title/:title' do
     postTitle = params[:title]
-    #TODO: get the post by it's title
+
+    #TODO: get the post by its title
     @post = {}
+
     slim :post
   end
 
