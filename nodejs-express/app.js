@@ -1,7 +1,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var rethinkdb = require('rethinkdb');
+var r = require('rethinkdb');
 var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +20,13 @@ app.get('/post', function(req, res) {res.render('makepost');});
 /*
 // DO THINGS HERE:
 */
+
+//TODO: Make database connection
+var connection = null;
+r.connect({/* Database connection goes here */}, function(err, conn) {
+  if (err) throw err;
+  connection = conn;
+});
 
 app.post('/post', function(req, res) {
   var postInfo = req.body.post;

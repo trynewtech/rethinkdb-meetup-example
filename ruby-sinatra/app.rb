@@ -1,9 +1,11 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require 'slim'
+require 'rethinkdb'
 
 class Rethink < Sinatra::Base
   configure(:development){ register Sinatra::Reloader }
+  r = RethinkDB::RQL.new
 
   get '/' do slim :index end
   get '/post' do slim :makepost end
@@ -11,6 +13,9 @@ class Rethink < Sinatra::Base
   #
   # DO THINGS HERE
   #
+
+  #TODO: Make database connection
+  connection = RethinkDB::Connection.new()
 
   post '/post' do
     post_info = params[:post]

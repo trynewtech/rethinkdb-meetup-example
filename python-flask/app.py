@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import rethinkdb as r
 app = Flask(__name__)
 
 @app.route('/')
@@ -11,6 +12,9 @@ def make_post():
 '''
 ### DO THINGS HERE
 '''
+
+#TODO: Make database connection
+connection = r.connect()
 
 @app.route('/post', methods=['POST'])
 def post_post():
