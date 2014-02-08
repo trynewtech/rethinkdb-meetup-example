@@ -1,2 +1,2 @@
-source ./.env/bin/activate
+source ./env/bin/activate
 export PORT=3000
