@@ -12,7 +12,9 @@ app = Flask(__name__)
 # TODO: #1 Look at the README to add yourself to the blog
 
 # TODO: #2 Make database connection
-connection = r.connect()
+host = ''
+port = 0
+connection = r.connect(host, port)
 
 
 @app.route('/users')
