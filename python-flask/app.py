@@ -12,10 +12,8 @@ app = Flask(__name__)
 
 
 # TODO: #2. Make database connection
-# Hint: Set the following variables to actual values provided by the organizers
-host = ''
-port = 0
-connection = r.connect(host, port)
+# Hint: Set the following kwargs to actual values provided by the organizers
+connection = r.connect(host='', port=0, db='', auth_key='')
 
 
 # TODO: #3. Test it by running this script and visiting http://localhost:5000
