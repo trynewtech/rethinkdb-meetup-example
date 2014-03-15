@@ -13,14 +13,23 @@ class Rethink < Sinatra::Base
   #
   # DO THINGS HERE
   #
+  
+  #TODO: #1 look at the README to add yourself to the blog
 
-  #TODO: Make database connection
+  #TODO: #2 make database connection
   connection = RethinkDB::Connection.new()
+
+  get '/users' do
+    #TODO: #3 get all users
+    @users = []
+
+    slim :users
+  end
 
   post '/post' do
     post_info = params[:post]
 
-    #TODO: save the post
+    #TODO: #4 save the post
     post = {}
 
     redirect '/post' + post.id
@@ -29,24 +38,15 @@ class Rethink < Sinatra::Base
   get '/post/:id' do
     post_id = params[:id]
 
-    #TODO: get the post by its id (use postId)
+    #TODO: #5 get the post by its id (use postId)
     @post = {}
-
-    #Optional TODO: get the users information
-    @user = {}
 
     slim :post
   end
 
-  get '/users' do
-    #TODO: get all users
-    @users = []
-
-    slim :users
-  end
 
   get '/posts' do
-    #TODO: get all posts
+    #TODO: #6 get all posts
     @posts = []
 
     slim :posts
@@ -55,7 +55,7 @@ class Rethink < Sinatra::Base
   get '/user/:id/posts' do
     user_id = params[:id]
 
-    #TODO: get all posts by a user (user their userId)
+    #TODO: #7 get all posts by a user (user their userId)
     @posts = []
 
     slim :posts
@@ -66,8 +66,21 @@ class Rethink < Sinatra::Base
   get '/post/title/:title' do
     post_title = params[:title]
 
-    #TODO: get the post by its title
+    #TODO: #8 get the post by its title
     @post = {}
+
+    slim :post
+  end
+
+  # get post and author (user) information
+  get '/post/:id/details' do
+    post_id = params[:id]
+
+    #TODO: #9 get the post by its id (use postId) (you did this before :)
+    @post = {}
+
+    #TODO: #10 get the users information
+    @user = {}
 
     slim :post
   end

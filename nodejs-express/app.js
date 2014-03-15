@@ -21,17 +21,26 @@ app.get('/post', function(req, res) {res.render('makepost');});
 // DO THINGS HERE:
 */
 
-//TODO: Make database connection
+//TODO: #1 look at the README to add yourself to the blog
+
+//TODO: #2 make database connection
 var connection = null;
 r.connect({/* Database connection goes here */}, function(err, conn) {
   if (err) throw err;
   connection = conn;
 });
 
+app.get('/users', function(req, res) {
+  //TODO: #3 get all users
+  var users = [];
+
+  res.render('users', { users: users });
+});
+
 app.post('/post', function(req, res) {
   var postInfo = req.body.post;
 
-  //TODO: save the post
+  //TODO: #4 save the post
   var post = {};
 
   res.redirect('/post/' + post.id);
@@ -40,24 +49,14 @@ app.post('/post', function(req, res) {
 app.get('/post/:id', function(req, res) {
   var postId = req.params.id;
 
-  //TODO: get the post by its id (use postId)
+  //TODO: #5 get the post by its id (use postId)
   var post = {};
 
-  //Optional TODO: get the user's information
-  var user = {};
-
-  res.render('post', { post: post, user: user });
-});
-
-app.get('/users', function(req, res) {
-  //TODO: get all users
-  var users = [];
-
-  res.render('users', { users: users });
+  res.render('post', { post: post });
 });
 
 app.get('/posts', function(req, res) {
-  //TODO: get all posts
+  //TODO: #6 get all posts
   var posts = [];
 
   res.render('posts', { posts: posts });
@@ -66,7 +65,7 @@ app.get('/posts', function(req, res) {
 app.get('/user/:id/posts', function(req, res) {
   var userId = req.params.id;
 
-  //TODO: get all posts by a user (use their userId)
+  //TODO: #7 get all posts by a user (use their userId)
   var posts = [];
 
   res.render('posts', { posts: posts });
@@ -77,10 +76,23 @@ app.get('/user/:id/posts', function(req, res) {
 app.get('/post/title/:title', function(req, res) {
   var postTitle = req.params.title;
 
-  //TODO: get the post by its title
+  //TODO: #8 get the post by its title
   var post = {};
 
   res.render('post', { post: post });
+});
+
+// get post and author (user) information
+app.get('/post/:id/details', function(req, res) {
+  var postId = req.params.id;
+
+  //TODO: #9 get the post by its id (use postId) (you did this before :)
+  var post = {};
+
+  //TODO: #10 get the user's information
+  var user = {};
+
+  res.render('post', { post: post, user: user });
 });
 
 /*
