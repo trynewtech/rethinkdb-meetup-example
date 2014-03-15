@@ -46,10 +46,12 @@ def users():
 @app.route('/post', methods=['POST'])
 def post_post():
     post_title = request.form['title']
+    post_slug = slugify(post_title)
     post_text = request.form['text']
 
     # TODO: #6. Save the post to the database and get the resulting ID
-    # Hint: Use post_title and post_text in your query
+    # Hint: Use "post_title", "post_slug", and "post_text" in your query
+    # Hint: Get the ID from the result of the query
     post_id = 0
 
     # Note: This redirects, so you'll have to complete #7 before testing this
@@ -61,6 +63,7 @@ def post(id):
     # TODO: #7. Get the post by its ID by using the provided "id" argument
     post = {
         'id': 0,
+        'slug': '',
         'title': '',
         'text': '',
     }
@@ -106,11 +109,11 @@ def user_posts(id):
 # stored. Note: this is a shared database, please respect each others' data.
 
 
-@app.route('/post/<title>')
-def post_by_title(title):
-    """Displays the post given its title."""
+@app.route('/post/<slug>')
+def post_by_slug(slug):
+    """Displays the post given its slug."""
 
-    # TODO: #14. Get a post by its title by using the provided "title" argument
+    # TODO: #14. Get a post by its slug by using the provided "slug" argument
     post = {}
 
     return render_template('post.html', post=post)
@@ -154,6 +157,10 @@ def index():
 def new_post():
     return render_template('new_post.html')
 
+
+# Helpers
+def slugify(title):
+    return title.replace(' ', '-').lower()
 
 if __name__ == '__main__':
     app.run(debug=True)

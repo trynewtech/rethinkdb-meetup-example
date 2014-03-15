@@ -13,7 +13,7 @@
   <li><a href="{{ url_for('new_post') }}">Create another post</a>
   <li>
     Friendly URL:
-    <a href="{{ url_for('post_by_title', title=post.title) }}">{{ url_for('post_by_title', title=post.title) }}</a>
+    <a href="{{ url_for('post_by_slug', slug=post.slug) }}">{{ url_for('post_by_slug', slug=post.slug) }}</a>
     (Visit this only after completing <strong>TODO #14</strong>)
   </li>
   <li>
