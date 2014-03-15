@@ -1,4 +1,11 @@
 {% extends '_layout.html' %}
 {% block content %}
-<h1>Welcome to RethinkDB</h1>
+<h1>Welcome to RethinkDB!</h1>
+<p>Congratulations! You've successfully connected to RethinkDB.</p>
+<p>Now open app.py back up to make the following links work.</p>
+<ul>
+  <li><a href="{{ url_for('users') }}">View all users</a> (Visit this only after you've completed <strong>TODO #4</strong>)</li>
+  <li><a href="{{ url_for('new_post') }}">Create a post</a> (Visit this only after you've completed <strong>TODO #7</strong>)</li>
+  <li><a href="{{ url_for('posts') }}">View all post</a> (Visit this only after you've completed <strong>TODO #6</strong>)</li>
+</ul>
 {% endblock %}

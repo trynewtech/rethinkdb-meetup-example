@@ -1,28 +1,46 @@
-from flask import Flask, request, render_template, redirect, url_for
 import rethinkdb as r
-
-
+from flask import Flask, request, render_template, redirect, url_for
 app = Flask(__name__)
 
 
-'''
-### DO THINGS HERE
-'''
+"""
+### COMPLETE THE FOLLOWING TODOS
+"""
 
-# TODO: #1 Look at the README to add yourself to the blog
 
-# TODO: #2 Make database connection
+# TODO: #1. Look at the README to add yourself to the blog
+
+
+# TODO: #2. Make database connection
+# Hint: Set the following variables to actual values provided by the organizers
 host = ''
 port = 0
 connection = r.connect(host, port)
 
 
+# TODO: #3. Test it by running this script and visiting http://localhost:5000
+
+
+# REMEMBER!
+# If you need help, visit http://rethinkdb.com/docs/guide/python/
+# Or raise your hand / ask a nearby mentor to come help you if you get stuck.
+
+
 @app.route('/users')
 def users():
-    # TODO: #3 Get all users
-    users = []
+    # TODO: #4. Get all users
+    # Hint: Construct a list of user objects (dictionaries) like the following
+    users = [
+        {
+            'id': 0,
+            'name': '',
+        },
+    ]
 
     return render_template('users.html', users=users)
+
+
+# TODO: #5. Visit http://localhost:5000/users in the browser to test #4
 
 
 @app.route('/post', methods=['POST'])
@@ -30,74 +48,112 @@ def post_post():
     post_title = request.form['title']
     post_text = request.form['text']
 
-    # TODO: #4 Save the post to the database
-    post = {}
+    # TODO: #6. Save the post to the database and get the resulting ID
+    # Hint: Use post_title and post_text in your query
+    post_id = 0
 
-    return redirect(url_for('post', id=post['id']))
+    # Note: This redirects, so you'll have to complete #7 before testing this
+    return redirect(url_for('post', id=post_id))
 
 
 @app.route('/post/<id>')
 def post(id):
-    # TODO: #5 Get the post by its id (use id)
-    post = {}
+    # TODO: #7. Get the post by its ID by using the provided "id" argument
+    post = {
+        'id': 0,
+        'title': '',
+        'text': '',
+    }
 
     return render_template('post.html', post=post)
 
 
+# TODO: #8. Visit http://localhost:5000/post and create a few posts
+
+
 @app.route('/posts')
 def posts():
-    # TODO: #6 Get all posts
+    # TODO: #9. Get all posts
+    # Hint: posts has the same structure as #7, but now within a list
     posts = []
 
     return render_template('posts.html', posts=posts)
 
 
-@app.route('/user/<id>/posts')
+# TODO: #10. Visit http://localhost:5000/posts to see everyone's posts so far
+
+
+@app.route('/user/<id>')
 def user_posts(id):
-    # TODO: #7 Get all posts by a user (use their id)
+    # TODO: #11. Get all posts from a specific user by using the provided "id" argument
+    # Hint: Same as #9. But you already knew that, right?
     posts = []
 
     return render_template('posts.html', posts=posts)
 
 
-# --- ADVANCED ---
+# TODO: #12. Visit the users page again and click on a user to see their posts
+
+
+"""
+### CONGRATULATIONS
+### You've completed the beginner challenges.
+### Now see if you can complete the following!
+"""
+
+
+# TODO: #13. Visit the RethinkDB interface again to see how the data is being
+# stored. Note: this is a shared database, please respect each others' data.
+
 
 @app.route('/post/<title>')
 def post_by_title(title):
     """Displays the post given its title."""
 
-    # TODO: #8 Get the post by its title
+    # TODO: #14. Get a post by its title by using the provided "title" argument
     post = {}
 
     return render_template('post.html', post=post)
+
+
+# TODO: #15. Visit a post page and click on the "friendly URL" link to test it
 
 
 @app.route('/post/<id>/details')
 def post_details(id):
     """Displays the post and additional details, i.e. the author information."""
 
-    # TODO: #9 Get the post by its id (use id) (you did this before :)
+    # TODO: #16. Get the post and its user from the provided post ID
+    # Hint: Use a table join
     post = {}
-
-    # TODO: #10 Get the user's information
-    user = {}
+    user = {
+        'id': 0,
+        'name': '',
+    }
 
     return render_template('post.html', post=post, user=user)
 
 
-'''
-### OKAY STOP DOING THINGS
-'''
+# TODO: #17. Go back to a post page and visit the "Post details" at the bottom
+
+
+"""
+### CONGRATULATIONS!
+### You've completed the intermediate challenges.
+### Take a breather. Talk to a nearby mentor when you're ready for more.
+"""
 
 
 # Views you don't care about
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
 @app.route('/post')
-def make_post():
-    return render_template('makepost.html')
+def new_post():
+    return render_template('new_post.html')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)

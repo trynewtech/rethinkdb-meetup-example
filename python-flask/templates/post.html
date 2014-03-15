@@ -1,8 +1,24 @@
 {% extends '_layout.html' %}
 {% block content %}
 <h2>{{ post.title }}<h2>
-{% if user.name %}
-<h5>by {{ user.name }}</h5>
+{% if user and user.name %}
+<h5>By <a href="{{ url_for('user_posts', id=user.id) }}">{{ user.name }}</h5>
 {% endif %}
-<p>{{ post.text }}</p>
+<p>
+<pre>{{ post.text }}</pre>
+</p>
+<hr />
+<ul>
+  <li><a href="{{ url_for('index') }}">Home</a>
+  <li><a href="{{ url_for('new_post') }}">Create another post</a>
+  <li>
+    Friendly URL:
+    <a href="{{ url_for('post_by_title', title=post.title) }}">{{ url_for('post_by_title', title=post.title) }}</a>
+    (Visit this only after completing <strong>TODO #14</strong>)
+  </li>
+  <li>
+    <a href="{{ url_for('post_details', title=post.title) }}">Post details</a>
+    (Visit this only after completing <strong>TODO #16</strong>)
+  </li>
+</ul>
 {% endblock %}
