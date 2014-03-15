@@ -162,5 +162,6 @@ def new_post():
 def slugify(title):
     return title.replace(' ', '-').lower()
 
+
 if __name__ == '__main__':
     app.run(debug=True)

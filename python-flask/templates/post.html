@@ -1,24 +1,29 @@
 {% extends '_base.html' %}
+
 {% block content %}
-<h2>{{ post.title }}<h2>
-{% if user and user.name %}
-<h5>By <a href="{{ url_for('user_posts', id=user.id) }}">{{ user.name }}</h5>
-{% endif %}
-<p>
+  <h2>{{ post.title }}<h2>
+  
+  {% if user and user.name %}
+    <h5>By <a href="{{ url_for('user_posts', id=user.id) }}">{{ user.name }}</h5>
+  {% endif %}
+
+  <p>
 <pre>{{ post.text }}</pre>
-</p>
-<hr />
-<ul>
-  <li><a href="{{ url_for('index') }}">Home</a>
-  <li><a href="{{ url_for('new_post') }}">Create another post</a>
-  <li>
-    Friendly URL:
-    <a href="{{ url_for('post_by_slug', slug=post.slug) }}">{{ url_for('post_by_slug', slug=post.slug) }}</a>
-    (Visit this only after completing <strong>TODO #14</strong>)
-  </li>
-  <li>
-    <a href="{{ url_for('post_details', id=post.id) }}">Post details</a>
-    (Visit this only after completing <strong>TODO #16</strong>)
-  </li>
-</ul>
+  </p>
+
+  <hr />
+
+  <ul>
+    <li><a href="{{ url_for('index') }}">Home</a>
+    <li><a href="{{ url_for('new_post') }}">Create another post</a>
+    <li>
+      Friendly URL:
+      <a href="{{ url_for('post_by_slug', slug=post.slug) }}">{{ url_for('post_by_slug', slug=post.slug) }}</a>
+      (Visit this only after completing <strong>TODO #14</strong>)
+    </li>
+    <li>
+      <a href="{{ url_for('post_details', id=post.id) }}">Post details</a>
+      (Visit this only after completing <strong>TODO #16</strong>)
+    </li>
+  </ul>
 {% endblock %}
