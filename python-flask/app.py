@@ -15,7 +15,9 @@ app = Flask(__name__)
 # Hint: Set the following variables to actual values provided by the organizers
 host = ''
 port = 0
-connection = r.connect(host, port)
+db = ''
+auth_key = ''
+connection = r.connect(host, port, db, auth_key)
 
 
 # TODO: #3. Test it by running this script and visiting http://localhost:5000
@@ -109,7 +111,7 @@ def user_posts(id):
 # stored. Note: this is a shared database, please respect each others' data.
 
 
-@app.route('/post/<slug>')
+@app.route('/post/title/<slug>')
 def post_by_slug(slug):
     """Displays the post given its slug."""
 
