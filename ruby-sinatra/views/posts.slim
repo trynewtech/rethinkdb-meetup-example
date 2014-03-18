@@ -1,4 +1,5 @@
 h3 Posts:
-- @posts.each do |post|
-  a href="/post/#{post['id']}"
-    h3 = post['title']
+ul
+  - @posts.each do |post|
+    li
+      a href="/post/#{post[:id]}" #{post[:title]}
