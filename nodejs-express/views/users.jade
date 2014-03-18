@@ -2,6 +2,8 @@ extends layout
 
 block content
   h3 Users:
-  each user in users
-    a(href='/user/#{user.id}/posts')
-      h3= user.name
+  ul
+    each user in users
+      li
+        a(href='/user/#{user.id}/posts')= user.name
+        |  (Visit this only after completing <strong>TODO #11</strong>)
