@@ -2,6 +2,7 @@ extends layout
 
 block content
   h3 Posts:
-  each post in posts
-    a(href='/post/#{post.id}')
-      h3= post.title
+  ul
+    each post in posts
+      li
+        a(href='/post/#{post.id}')= post.title
