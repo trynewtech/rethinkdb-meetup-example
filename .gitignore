@@ -1,2 +1,15 @@
+# Deployment files
+instance
+
+# Environment files
 env
+*.so
+*.py[cod]
 .activate
+settings_local.py
+node_modules
+
+# OS-specific files
+.DS_Store
+Desktop.ini
+Thumbs.db
