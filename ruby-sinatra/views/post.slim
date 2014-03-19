@@ -1,4 +1,21 @@
-h2 = @post[:title]
-- if @user? and @user.has_key? 'name'
-  h5 by #{@user[:name]}
-p = @post[:text]
+h2 = @post['title']
+- if @user and @user.has_key? 'name'
+  h5
+    | by
+    a< href="/user/#{@user['name']}/posts" = @user['name']
+p
+  pre = @post['text']
+hr
+ul
+  li
+    a href='/' Home
+  li
+    a href='/post' Create another post
+  li
+    | Friendly URL:
+    a< href='/post/title/#{@post["slug"]}'
+      | /post/title/#{@post['slug']}
+    |  (Visit this only after completing <strong>TODO #15</strong>)
+  li
+    a href='/post/#{@post["id"]}/details' Post details
+    |  (Visit this only after completing <strong>TODO #17</strong>)

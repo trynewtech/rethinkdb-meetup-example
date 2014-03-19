@@ -2,5 +2,5 @@ h3 Users:
 ul
   - @users.each do |user|
     li
-      a href="/user/#{user[:id]}/posts" #{user[:name]}
-      |  (Visit this only after completing <strong>TODO #11</strong>)
+      a href="/user/#{user['id']}/posts" #{user['name']}
+      |  (Visit this only after completing <strong>TODO #12</strong>)
