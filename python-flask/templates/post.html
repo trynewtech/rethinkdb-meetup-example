@@ -4,11 +4,11 @@
   <h2>{{ post.title }}<h2>
   
   {% if user and user.name %}
-    <h5>By <a href="{{ url_for('user_posts', id=user.id) }}">{{ user.name }}</h5>
+    <h5>By <a href="{{ url_for('user_posts', id=user.id) }}">{{ user.name }}</a></h5>
   {% endif %}
 
   <p>
-<pre>{{ post.text }}</pre>
+    <pre>{{ post.text }}</pre>
   </p>
 
   <hr />
@@ -19,11 +19,11 @@
     <li>
       Friendly URL:
       <a href="{{ url_for('post_by_slug', slug=post.slug) }}">{{ url_for('post_by_slug', slug=post.slug) }}</a>
-      (Visit this only after completing <strong>TODO #14</strong>)
+      (Visit this only after completing <strong>TODO #15</strong>)
     </li>
     <li>
       <a href="{{ url_for('post_details', id=post.id) }}">Post details</a>
-      (Visit this only after completing <strong>TODO #16</strong>)
+      (Visit this only after completing <strong>TODO #17</strong>)
     </li>
   </ul>
 {% endblock %}
