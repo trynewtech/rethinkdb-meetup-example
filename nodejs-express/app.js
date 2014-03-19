@@ -45,13 +45,12 @@ r.connect({host: host, port: port, db: db, authKey: authKey}, function(err, conn
 app.get('/users', function(req, res) {
   // TODO: #4. Get all users
   // Hint: The RethinkDB query will return a cursor
-  r.table('users').run(connection, function(err, cursor) {
-    cursor.toArray(function(err, users) {
-      if (err) throw err;
-      // Put this in the final callback
-      res.render('users', { users: users });
-    });
-  });
+
+  users = {};
+
+  // Put this in the final callback
+  res.render('users', { users: users });
+
 });
 
 // TODO: #5. Visit http://localhost:3000/users in the browser to test #4
@@ -70,36 +69,35 @@ app.post('/post', function(req, res) {
   // TODO: #7. Save the post to the database and get the resulting ID
   // Hint: Use "postInfo" in your query
   // Hint: Get the ID from the result of the query
-  r.table('posts').insert(postInfo).run(connection, function(err, result) {
-    if (err) throw err;
-    var postId = result.generated_keys[0];
-    // Note: This redirects, so you'll have to complete #8 before testing this
-    res.redirect('/post/' + postId);
-  });
+
+  postId = '';
+
+  // Note: This redirects, so you'll have to complete #8 before testing this
+  res.redirect('/post/' + postId);
+
 });
 
 app.get('/post/:id', function(req, res) {
   var postId = req.params.id;
 
   // TODO: #8. Get the post by its ID (use postId)
-  r.table('posts').get(postId).run(connection, function(err, post) {
-    if (err) throw err;
-    res.render('post', { post: post });
-  });
+
+  post = {};
+
+  res.render('post', { post: post });
+
 });
 
 // TODO: #9. Visit http://localhost:3000/post and create a few posts
 
 app.get('/posts', function(req, res) {
   // TODO: #10. Get all posts
-  r.table('posts').run(connection, function(err, cursor) {
-    if (err) throw err;
-    cursor.toArray(function(err, posts) {
-      if (err) throw err;
-      // Put this in the final callback
-      res.render('posts', { posts: posts });
-    });
-  });
+
+  posts = {};
+
+  // Put this in the final callback
+  res.render('posts', { posts: posts });
+
 });
 
 // TODO: #11. Visit http://localhost:3000/posts to see everyone's posts so far
@@ -108,14 +106,12 @@ app.get('/user/:id/posts', function(req, res) {
   var userId = req.params.id;
 
   // TODO: #12. Get all posts by a user using the provided "userId" variable
-  r.table('posts').filter(r.row('user_id').eq(userId)).run(connection, function(err, cursor) {
-    if (err) throw err;
-    cursor.toArray(function(err, posts) {
-      if (err) throw err;
-      // As always, put this in the final callback
-      res.render('posts', { posts: posts });
-    });
-  });
+
+  posts = {};
+
+  // As always, put this in the final callback
+  res.render('posts', { posts: posts });
+
 });
 
 // TODO: #13. Visit the users page again and click on a user to see their posts
@@ -137,14 +133,11 @@ app.get('/post/title/:slug', function(req, res) {
   var postSlug = req.params.slug;
 
   // TODO: #15. Get a post by its slug by using the postSlug variable
-  r.table('posts').filter(r.row('slug').eq(postSlug)).run(connection, function(err, cursor) {
-    if (err) throw err;
-    cursor.toArray(function(err, posts) {
-      if (err) throw err;
-      post = posts[0];
-      res.render('post', { post: post });
-    });
-  });
+
+  post = {};
+
+  res.render('post', { post: post });
+
 });
 
 // TODO: #16. Visit a page and click on the "friendly URL" link to test it
@@ -155,18 +148,12 @@ app.get('/post/:id/details', function(req, res) {
 
   // TODO: #17. Get the post by its id (use postId), and get the authors information
   // Hint: Use a table join
-  r.table('posts')
-    .eqJoin('user_id', r.table('users'))
-    .filter(r.row('left')('id').eq(postId))
-    .run(connection, function(err, cursor) {
-      if (err) throw err;
-      cursor.toArray(function(err, postAndUser) {
-        if (err) throw err;
-        post = postAndUser[0]['left'];
-        user = postAndUser[0]['right'];
-        res.render('post', { post: post, user: user });
-      });
-  });
+  post = {};
+  user = {};
+
+
+  res.render('post', { post: post, user: user });
+
 });
 
 // TODO: #18. Go back to a post page and visit the "Post details" at the bottom

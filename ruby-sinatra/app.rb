@@ -33,10 +33,7 @@ class Rethink < Sinatra::Base
   get '/users' do
     # TODO: #4. Get all users
     # Hint: The RethinkDB query will return an interable object
-    cursor = r.table('users').run(connection)
-    @users = cursor.to_a
-
-    puts @users.to_s
+    @users = {}
 
     slim :users
   end
@@ -59,8 +56,8 @@ class Rethink < Sinatra::Base
     # TODO: #7. Save the post to the database and get the resulting ID
     # Hint: Use "post_info" in your query
     # Hint: Get the ID from the result of the query
-    result = r.table('posts').insert(post).run(connection)
-    post_id = result['generated_keys'][0]
+
+    post_id = ''
 
     # Note: This redirects, so you'll have to complete #8 before testing this
     redirect '/post/' + post_id
@@ -70,7 +67,7 @@ class Rethink < Sinatra::Base
     post_id = params[:id]
 
     # TODO: #8. Get the post by its id (use post_id)
-    @post = r.table('posts').get(post_id).run(connection)
+    @post = {}
 
     slim :post
   end
@@ -79,8 +76,8 @@ class Rethink < Sinatra::Base
 
   get '/posts' do
     # TODO: #10. Get all posts
-    cursor = r.table('posts').run(connection)
-    @posts = cursor.to_a
+
+    @posts = {}
 
     slim :posts
   end
@@ -91,8 +88,8 @@ class Rethink < Sinatra::Base
     user_id = params[:id]
 
     # TODO: #12. Get all posts by a user using the provided "user_id" variable
-    cursor = r.table('posts').filter{|post| post['user_id'].eq(user_id)}.run(connection)
-    @posts = cursor.to_a
+
+    @posts = {}
 
     slim :posts
   end
@@ -113,8 +110,8 @@ class Rethink < Sinatra::Base
     post_slug = params[:slug]
 
     # TODO: #15. Get a post by its slug by using the "post_slug" variable
-    cursor = r.table('posts').filter{|post| post['slug'].eq(post_slug)}.run(connection)
-    @post = cursor.to_a[0]
+
+    @post = {}
 
     slim :post
   end
@@ -127,13 +124,9 @@ class Rethink < Sinatra::Base
 
     # TODO: #17. Get the post by its id (use postId), and get the authors information
     # Hint: Use a table join
-    cursor = r.table('posts')
-      .eq_join(:user_id, r.table('users'))
-      .filter{|result| result['left']['id'].eq(post_id)}
-      .run(connection)
-    post_and_user = cursor.to_a
-    @post = post_and_user[0]['left']
-    @user = post_and_user[0]['right']
+
+    @post = {}
+    @user = {}
 
     slim :post
   end

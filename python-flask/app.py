@@ -32,8 +32,7 @@ connection = r.connect(host, port, db, auth_key)
 def users():
     # TODO: #4. Get all users
     # Hint: The RethinkDB query will return an iterable
-    cursor = r.table('users').run(connection)
-    users = list(cursor)
+    users = {}
 
     return render_template('users.html', users=users)
 
@@ -58,13 +57,8 @@ def post_post():
     # TODO: #7. Save the post to the database and get the resulting ID
     # Hint: Use "post_title", "post_slug", and "post_text" in your query
     # Hint: Get the ID from the result of the query
-    result = r.table('posts').insert({
-            'title': post_title,
-            'slug': post_slug,
-            'text': post_text,
-            'user_id': post_user_id,
-        }).run(connection)
-    post_id = result['generated_keys'][0]
+    post_id = ''
+
 
     # Note: This redirects, so you'll have to complete #8 before testing this
     return redirect(url_for('post', id=post_id))
@@ -73,7 +67,8 @@ def post_post():
 @app.route('/post/<id>')
 def post(id):
     # TODO: #8. Get the post by its ID by using the provided "id" argument
-    post = r.table('posts').get(id).run(connection)
+
+    post = {}
 
     return render_template('post.html', post=post)
 
@@ -84,8 +79,8 @@ def post(id):
 @app.route('/posts')
 def posts():
     # TODO: #10. Get all posts
-    cursor = r.table('posts').run(connection)
-    posts = list(cursor)
+
+    posts = {}
 
     return render_template('posts.html', posts=posts)
 
@@ -96,8 +91,8 @@ def posts():
 @app.route('/user/<id>')
 def user_posts(id):
     # TODO: #12. Get all posts from a specific user by using the provided "id" argument
-    cursor = r.table('posts').filter(r.row['user_id'] == id).run(connection)
-    posts = list(cursor)
+
+    posts = {}
 
     return render_template('posts.html', posts=posts)
 
@@ -121,8 +116,8 @@ def post_by_slug(slug):
     """Displays the post given its slug."""
 
     # TODO: #15. Get a post by its slug by using the provided "slug" argument
-    cursor = r.table('posts').filter(r.row['slug'] == slug).run(connection)
-    post = list(cursor)[0]
+
+    post = {}
 
     return render_template('post.html', post=post)
 
@@ -136,13 +131,9 @@ def post_details(id):
 
     # TODO: #17. Get the post and its user from the provided post ID
     # Hint: Use a table join
-    cursor = r.table('posts')\
-        .eq_join('user_id', r.table('users'))\
-        .filter(r.row['left']['id'] == id)\
-        .run(connection)
-    post_and_user = list(cursor)
-    post = post_and_user[0]['left']
-    user = post_and_user[0]['right']
+
+    post = {}
+    user = {}
 
     return render_template('post.html', post=post, user=user)
 
