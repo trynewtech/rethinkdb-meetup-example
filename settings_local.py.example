@@ -6,8 +6,16 @@ Note that local settings should NOT be committed to version control.
 """
 
 
+# Server settings
 HOST = 'localhost'                          # Use '0.0.0.0' to expose this externally
 PORT = 5000                                 # Use 80 to behave like a standard server
 DEBUG = True                                # Uses debug mode when run with app.run()
 SECRET_KEY = 'development key'              # Generate a key to enable secure cookies
 SERVER_NAME = os.environ.get('SERVER_NAME') # The external-visible name of the server
+
+
+# Database settings
+DATABASE_HOST = 'localhost'
+DATABASE_PORT = 28015
+DATABASE_DB = 'trynewtech'
+DATABASE_AUTH_KEY = ''

@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <title>{% block title %}Try New Tech - RethinkDB Meetup{% endblock %}</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
   {% block styles %}{% endblock %}
   <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   {% block priority_scripts %}{% endblock %}
 </head>
 <body>
-  <h1>Welcome to Try New Tech!</h1>
   {% block content %}{% endblock %}
+
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

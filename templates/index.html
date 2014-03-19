@@ -1,5 +1,67 @@
 {% extends '_base.html' %}
 
+{% block styles %}
+  <style>
+    h1 {
+      text-align: center;
+    }
+    h2 {
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    em {
+      display: block;
+      text-align: center;
+    }
+    li {
+      text-align: center; 
+      font-size: 28px;
+      color: blue;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(function() {
+
+      // Update users every second
+      setInterval(function() {
+        var url = $('.user-list').data('url');
+        $('.user-list').load(url);
+      }, 1000);
+
+      // Update posts every second
+      setInterval(function() {
+        var url = $('.post-list').data('url');
+        $('.post-list').load(url);
+      }, 1000);
+
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
-  {# TODO: implement #}
+  <div class="container">
+    <h1>Try New Tech Leaderboard</h1>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Users</h2>
+        <div class="user-list" data-url="{{ url_for('user_list') }}">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2>Posts</h2>
+        <div class="post-list" data-url="{{ url_for('post_list') }}">
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

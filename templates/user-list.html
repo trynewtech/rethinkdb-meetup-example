@@ -1,0 +1,9 @@
+{% if users %}
+  <ul>
+    {% for user in users %}
+      <li>{{ user['name'] }}</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <em>No users yet!</em>
+{% endif %}
